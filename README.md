@@ -49,7 +49,8 @@ You can override these configurations params with an initializer. This is especi
 
 Proselytism create its converted files in temporary folders.
   - If you pass a block to the method the folders are automatically deleted after the block is yield, so use or copy the file content within the block
-  - If you don't think to safely remove folder
+  - If you don't pass a block, don't forget to safely remove the temp folder
+
     pdf_file_path = Proselytism.convert source_file_path, :to => :pdf
     FileUtils.remove_entry_secure File.dirname(pdf_file_path)
 
