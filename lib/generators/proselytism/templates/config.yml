@@ -1,0 +1,29 @@
+test:
+  open_office_path: "/Applications/OpenOffice.org.app/Contents/MacOS/soffice"
+  oo_server_bridge: "JOD"
+  oo_server_max_cpu: 95  #percent
+  oo_server_max_cpu_delay: 2 #seconds
+  oo_server_availability_delay: 6 # seconds
+  oo_server_start_delay: 2 #seconds
+  oo_conversion_max_tries: 2
+  oo_conversion_max_time: 4 #seconds
+
+development:
+  open_office_path: "/Applications/OpenOffice.org.app/Contents/MacOS/soffice"
+  oo_server_bridge: "JOD"
+  oo_server_max_cpu: 95  #percent
+  oo_server_max_cpu_delay: 2 #seconds
+  oo_server_availability_delay: 6 # seconds
+  oo_server_start_delay: 2 #seconds
+  oo_conversion_max_tries: 2
+  oo_conversion_max_time: 4 #seconds
+
+production:
+  open_office_path: "/usr/bin/soffice"
+  oo_server_bridge: "PYOD"
+  oo_server_max_cpu: 98  #percent
+  oo_server_max_cpu_delay: 2 #seconds
+  oo_server_availability_delay: 7 #seconds
+  oo_server_start_delay: 2 #seconds
+  oo_conversion_max_tries: 2
+  oo_conversion_max_time: 5 #seconds
