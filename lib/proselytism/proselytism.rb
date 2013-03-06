@@ -63,7 +63,6 @@ module Proselytism
   end
 
   def self.extract_images(file_path, options={}, &block)
-    output = nil
     if File.extname(file_path).match(/pdf/)
       convert file_path, :to => :ppm do |files|
         output = files.map do |file|
