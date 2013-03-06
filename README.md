@@ -19,7 +19,7 @@ Install the required external librairies :
 
 Add this line to your application's Gemfile:
 
-    gem 'proselytism', :git => "git://github.com/itkin/proselytism.git"
+    gem 'proselytism'
 
 And then execute:
 
