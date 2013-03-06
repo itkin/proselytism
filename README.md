@@ -7,9 +7,8 @@ Handled formats for document conversion : odt, doc, rtf, sxw, docx, txt, html, h
 ## Note
 
 This gem has been originally written as a RoR 3.2 engine running on Ruby 1.8.7. 
-It is framework agnostic and has been tested on Ubuntu and MacOSX.
 
-However due to its dependency to system_timer it doesn't work with ruby 1.9.x (feel free to fork and remove this dep, last ruby versions don't need it anymore)
+It is framework agnostic and has been tested on Ubuntu and MacOSX.
 
 ## Installation
 
@@ -22,6 +21,10 @@ Install the required external librairies :
 Add this line to your application's Gemfile:
 
     gem 'proselytism'
+
+Note : for ruby 1.9 use the branch 1.9
+
+    gem 'proselytism', :git => "git://github.com/itkin/proselytism.git", :branch => "1.9"
 
 And then execute:
 
