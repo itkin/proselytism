@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = Proselytism::VERSION
   gem.authors       = ["Itkin"]
   gem.email         = ["nicolas.papon@webflows.fr"]
-  gem.description   = %q{TODO: document converter and plain text extractor}
-  gem.summary       = %q{TODO: document converter and plain text extractor}
-  gem.homepage      = ""
+  gem.description   = %q{document converter and plain text extractor}
+  gem.summary       = %q{document converter and plain text extractor}
+  gem.homepage      = "https://github.com/itkin/proselytism.git"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
