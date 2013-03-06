@@ -75,8 +75,7 @@ FileUtils.remove_entry_secure File.dirname(pdf_file_path)
 Add your own converter by extending Proselytism::Converters::Base
   - Your converter will be automatically selected and used related to the params given to the :from and :to methods
   - Add a perform method which
-    - defines a text command
-    - calls execute
+    - calls the execute method with your custom command
     - returns the converted file(s) path(s)
 
 Proselytism::Converters::Base takes care of 
