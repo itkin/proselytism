@@ -1,6 +1,6 @@
 require 'pry'
 
-require "lib/proselytism"
+require_relative "../lib/proselytism"
 
 Proselytism.config do |config|
   config.open_office_path = "/Applications/OpenOffice.org.app/Contents/MacOS/soffice"

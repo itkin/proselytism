@@ -1,4 +1,5 @@
 require "active_support/core_ext/module/attribute_accessors"
+require "ensure/encoding"
 
 module Proselytism
   extend Shared
@@ -82,7 +83,7 @@ module Proselytism
 
   def self.extract_text(file_path, options={}, &block)
     convert(file_path, options.update(:to => :txt)) do |file|
-      text = File.read(file).toutf8
+      text = File.read(file).ensure_encoding('UTF-8')
       block_given? ? yield(text) : text
     end
   end

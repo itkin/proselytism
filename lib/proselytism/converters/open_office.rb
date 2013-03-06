@@ -1,4 +1,4 @@
-require 'system_timer'
+require 'timeout'
 
 class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
 
@@ -77,13 +77,13 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
       log :debug, "OpenOffice server started" do
         system "#{config.open_office_path} -headless -accept=\"socket,host=127.0.0.1,port=8100\;urp\;\" -nofirststartwizard -nologo -nocrashreport -norestore -nolockcheck -nodefault &"
         begin
-          SystemTimer.timeout_after(3) do
+          Timeout::timeout(3) do
             while !running?
               log :debug, ". Waiting OpenOffice server to run"
               sleep(0.1)
             end
           end
-        rescue
+        rescue Timeout::Error
           raise Error, "Could not start OpenOffice"
         end
         # OpenOffice needs some time to wake up
@@ -140,7 +140,7 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
     # Is the current instance stuck ?
     def stalled?
       begin
-        SystemTimer.timeout_after config.oo_server_max_cpu_delay do
+        Timeout::timeout config.oo_server_max_cpu_delay do
           loop do
             cpu_usage = `ps -Ao pcpu,pid,comm= | grep soffice`.split(/\n/).map{|usage| /^\s*\d+/.match(usage)[0].strip.to_i}
             break unless cpu_usage.all?{|usage| usage > config.oo_server_max_cpu }
@@ -148,8 +148,8 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
           end
         end
         false
-      rescue
-        log :error, "OpenOffice server stalled : \n---\n" + `ps -Ao pcpu,pid,comm | grep soffice` + "\n---"
+      rescue Timeout::Error
+        log :error, "OpenOffice server stalled : \n---\nps -Ao pcpu,pid,comm | grep soffice :" + `ps -Ao pcpu,pid,comm | grep soffice` + "\n---"
         true
       end
     end
@@ -163,7 +163,7 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
       start! unless running?
       restart! if stalled?
       begin
-        SystemTimer.timeout_after config.oo_server_availability_delay do
+        Timeout::timeout config.oo_server_availability_delay do
           while !available?
             log :debug, ". Waiting OpenOffice server availability"
             sleep(0.5)
