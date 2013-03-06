@@ -6,7 +6,7 @@ class Proselytism::Converters::PdfToText < Proselytism::Converters::Base
 
   def perform(origin, options={})
     destination = destination_file_path(origin, options.update(:to => :txt))
-    command = "pdftotext #{origin} #{destination} 2>&1"
+    command = "pdftotext -enc UTF-8 #{origin} #{destination} 2>&1"
     execute command
     destination
   end

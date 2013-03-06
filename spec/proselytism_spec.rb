@@ -90,13 +90,15 @@ describe Proselytism do
       proc{
         extract_text_form("001.pdf") do |text|
           text.should match("David FRANCOIS")
+          text.should match("ingénierie")
         end
       }.should_not change(self, :tmp_dir_file_count)
     end
-    it "should work with doc" do
+    it "should work with doc"  do
       proc{
         extract_text_form("002.doc") do |text|
           text.should match("Fanny HERBERT")
+          text.should match("l’Institut Supérieur d’Etudes")
         end
       }.should_not change(self, :tmp_dir_file_count)
     end
