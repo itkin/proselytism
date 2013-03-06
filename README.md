@@ -2,7 +2,7 @@
 
 Document converter, text and image extractor using OpenOffice headless server (JOD or PYOD converter), pdf_tools and net_pbm
 
-Handled formats for document conversion : odt, doc, rtf, sxw, docx, txt, html, htm, wps
+Handled formats for document conversion : odt, doc, rtf, sxw, docx, txt, html, htm, wps, pdf
 
 ## Note
 
