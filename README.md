@@ -2,6 +2,13 @@
 
 Document converter, text and image extractor using OpenOffice headless server, pdf_tools and net_pbm
 
+## Note
+
+This gem has been originally written for as a RoR 3.2 engine running on Ruby 1.8.7.
+It should be framework agnostic and has been tested on Ubuntu and MacOSX.
+
+Due to its dependency to system_timer it doesn't work with ruby 1.9.x
+
 ## Installation
 
 Install the required external librairies :
