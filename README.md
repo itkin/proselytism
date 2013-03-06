@@ -19,15 +19,11 @@ Install the required external librairies :
 
 Add this line to your application's Gemfile:
 
-    gem 'proselytism'
+    gem 'proselytism', :git => "git://github.com/itkin/proselytism.git"
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install proselytism
 
 Generate the config file or / and an initializer
 
