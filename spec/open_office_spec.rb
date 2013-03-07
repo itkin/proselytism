@@ -50,7 +50,7 @@ describe Proselytism::Converters::OpenOffice.instance do
       clear_tmp_dir
     end
 
-    it "should work" do
+    it "should work" , :focus do
       proc{
         subject.perform fixture_path("002.doc"), :dir => tmp_dir, :to => :txt
       }.should change(self, :tmp_dir_file_count).by 1

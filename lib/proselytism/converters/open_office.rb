@@ -28,15 +28,19 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
     destination
   end
 
-
-  # HACK pour contourner un comportement ?trange d'OpenOffice, normalement les enregistrements
-  # se font en UTF-8, mais parfois pour une raison obscure les fichiers texte sont en ISO-8859-1
-  # donc on rajoute un test pour re-convertir dans l'encodage qu'on attend
-  def convert_txt_to_utf8(file_path)
-    if `file #{file_path}` =~ /ISO/
-      system("iconv --from-code ISO-8859-1 --to-code UTF-8 #{file_path} > tmp_iconv.txt && mv tmp_iconv.txt #{file_path}")
+  # For unknown reason sometimes OpenOffice converts in ISO-8859-1,
+  # post process to ensure a conversion in UTF-8 when :to => :txt
+  def perform_with_ensure_utf8(origin, options={})
+    destination = perform_without_ensure_utf8(origin, options)
+    if options[:to].to_s == "txt" and `file #{destination}` =~ /ISO/
+      #log :warn, "***OOO has converted file in "
+      tmp_iconv_file = "#{destination}-tmp_iconv.txt"
+      execute("iconv --from-code ISO-8859-1 --to-code UTF-8 #{destination} > #{tmp_iconv_file} && mv #{tmp_iconv_file} #{destination}")
     end
+    destination
   end
+
+  alias_method_chain :perform, :ensure_utf8
 
   def server
     Server.instance
