@@ -34,7 +34,7 @@ And then execute:
 
   - With a YAML config file:
 
-  ```ruby
+  ```
   rails g proselytism:config
   ```
 
@@ -54,7 +54,7 @@ And then execute:
 
   To generate a full config initializer:
 
-  ```ruby
+  ```
   rails g proselytism:initializer
   ```
 
