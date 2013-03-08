@@ -11,13 +11,14 @@ module Proselytism
           params[Rails.env].each do |k, v|
             config.send "#{k}=", v
           end
-          Proselytism.config.logger = nil
         end
       end
     end
 
     ActiveSupport.on_load :after_initialize do |app|
-      Proselytism.config.logger ||= Rails.logger
+      Proselytism.config.log_level  ||= Rails.logger.level
+      Proselytism.config.log_path   ||= File.join(Rails.root, 'log', "proselytism.log")
+      Proselytism.config.logger     ||= Proselytism::BufferedLogger.new Proselytism.config.log_path, Proselytism.config.log_level
     end
 
   end

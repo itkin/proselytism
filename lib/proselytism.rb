@@ -1,7 +1,7 @@
 require "active_support/core_ext"
 
 require "proselytism/version"
-require "proselytism/shared"
+require "proselytism/logger"
 require "proselytism/proselytism"
 require "proselytism/converter"
 

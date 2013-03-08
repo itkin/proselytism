@@ -25,6 +25,13 @@ Proselytism.config do |config|
   #Path where conversion are done by default system temp dir
   #config.tmp_path = File.expand_path("../tmp",  __FILE__)
 
-  #Logger (otherwhise rails logger)
-  #config.logger = ActiveSupport::BufferedLogger.new("your/log/path")
+  #Log level: By default env log level
+  #config.log_level  = Rails.logger.level
+
+  #Log path :
+  #config.log_path   = File.join(Rails.root, 'log', "proselytism.log")
+
+  #Logger instance
+  #config.logger     = Proselytism::BufferedLogger.new Proselytism.config.log_path, Proselytism.config.log_level
+
 end

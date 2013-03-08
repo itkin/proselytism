@@ -33,6 +33,7 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
   def perform_with_ensure_utf8(origin, options={})
     destination = perform_without_ensure_utf8(origin, options)
     if options[:to].to_s == "txt" and `file #{destination}` =~ /ISO/
+      #lookup_on = Iconv.new('ASCII//TRANSLIT','UTF-8').iconv(str).upcase.strip.gsub(/'/, " ")
       #log :warn, "***OOO has converted file in "
       tmp_iconv_file = "#{destination}-tmp_iconv.txt"
       execute("iconv --from-code ISO-8859-1 --to-code UTF-8 #{destination} > #{tmp_iconv_file} && mv #{tmp_iconv_file} #{destination}")
@@ -49,12 +50,9 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
 
   class Server
     include Singleton
-    include Proselytism::Shared
     class Error < Proselytism::Converters::OpenOffice::Error; end
 
-    def config
-      Proselytism.config
-    end
+    delegate :config, :log, :to => Proselytism
 
     # Run a block with a timeout and retry if the first execution fails
     def perform(&block)

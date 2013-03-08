@@ -6,14 +6,13 @@ module Proselytism
   module Converters
     class Base
       include ::Singleton
-      include Proselytism::Shared
       class_attribute :from, :to, :subclasses
 
       class Error < Exception; end
 
-      def config
-        Proselytism.config
-      end
+
+      delegate :config, :log, :to => Proselytism
+
 
       def destination_file_path(origin, options={})
         if options[:dest]
@@ -25,11 +24,11 @@ module Proselytism
 
       #call perform logging duration and potential errors
       def convert(file_path, options={})
-        log :debug, "convert #{file_path} to :#{options[:to]}" do
+        log :debug, "#{self.class.name} converted #{file_path} to :#{options[:to]}" do
           begin
             perform(file_path, options)
           rescue Error => e
-            log :error, e.message
+            log :error, "#{e.class.name} #{e.message}\n#{e.backtrace}\n"
             raise e
           end
         end

@@ -50,10 +50,20 @@ describe Proselytism::Converters::OpenOffice.instance do
       clear_tmp_dir
     end
 
-    it "should work" , :focus do
+    it "should work" do
       proc{
         subject.perform fixture_path("002.doc"), :dir => tmp_dir, :to => :txt
       }.should change(self, :tmp_dir_file_count).by 1
+    end
+    it "should ensure destination file encoding is utf8" do
+      FileUtils.cp(fixture_path("001-latin.txt"), tmp_path("001-latin.txt"))
+      subject.should_receive(:perform_without_ensure_utf8).
+          with(fixture_path("001.doc"), :dir => tmp_dir, :to => :txt).
+          and_return(tmp_path("001-latin.txt"))
+      subject.perform fixture_path("001.doc"), :dir => tmp_dir, :to => :txt do |converted_file|
+        `file #{converted_file}`.should match 'UTF-8'
+        File.read(converted_file).should match('é')
+      end
     end
 
     it "should not freeze" do
