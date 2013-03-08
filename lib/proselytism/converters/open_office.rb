@@ -110,9 +110,9 @@ class Proselytism::Converters::OpenOffice < Proselytism::Converters::Base
       begin
         Timeout::timeout(3) do
           loop do
-            system("killall -9 soffice && killall -9 soffice.bin > /dev/null 2>&1")
+            system("killall -9 soffice > /dev/null 2>&1")
+            system("killall -9 soffice.bin > /dev/null 2>&1")
             break unless running?
-            sleep(0.2)
           end
         end
       rescue Timeout::Error
