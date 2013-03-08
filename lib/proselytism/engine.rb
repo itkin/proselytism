@@ -18,7 +18,7 @@ module Proselytism
     ActiveSupport.on_load :after_initialize do |app|
       Proselytism.config.log_level  ||= Rails.logger.level
       Proselytism.config.log_path   ||= File.join(Rails.root, 'log', "proselytism.log")
-      Proselytism.config.logger     ||= Proselytism::BufferedLogger.new Proselytism.config.log_path, Proselytism.config.log_level
+      Proselytism.config.logger     ||= Proselytism::Logger.new Proselytism.config.log_path, Proselytism.config.log_level
     end
 
   end
