@@ -30,23 +30,32 @@ And then execute:
 
     $ bundle
 
-Generate the config file 
+Configure the gem:
 
-    $ rails g proselytism:config
- 
-As an engine, Proselytism automatically load /config/proselytism.yml (if the file exists) and sets its config params depending on the current rails env. 
-
-Generate an initializer (optional)
-    
-    $ rails g proselytism:initializer
-
-You can override the configuration file params by adding an initializer (especially usefull when you want a custom log file to follow the conversion times in order to tune the server settings)
+  - With a YAML config file:
 
 ```ruby
-#/config/initializers/proselytism.rb
-Proselytism.config do |config|
-  config.logger = ActiveSupport::BufferedLogger.new(File.join(Rails.root, 'log', 'proselytism.log'))
-end
+  $ rails g proselytism:config
+```
+
+  As an engine, Proselytism automatically load /config/proselytism.yml (if the file exists) and set its config params depending on the current rails env.
+
+  - With an initializer (optional for Rails App) :
+
+  You can override the configuration file params by adding a custom initializer to /config/initializers .
+  By default Proselytism will log in a separate log file, if you want to use the rails logger
+
+```ruby
+  #/config/initializers/proselytism.rb
+  Proselytism.config do |config|
+    config.logger = Rails.logger
+  end
+```
+
+  To generate a full config initializer:
+
+```ruby
+  $ rails g proselytism:initializer
 ```
 
 ## Usage

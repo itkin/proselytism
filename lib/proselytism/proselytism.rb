@@ -2,7 +2,6 @@ require "active_support/core_ext/module/attribute_accessors"
 require "ensure/encoding"
 
 module Proselytism
-  extend Shared
   mattr_accessor :config
 
   def self.config(&block)
@@ -25,6 +24,9 @@ module Proselytism
       end
     end
   end
+
+
+
 
   # Finds the relevant converter
   def self.get_converter(origin, destination)

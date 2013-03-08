@@ -15,7 +15,7 @@ Proselytism.config do |config|
   config.oo_conversion_max_time = 4 #seconds
 
   config.tmp_path = File.expand_path("../tmp",  __FILE__)
-  config.logger = ActiveSupport::BufferedLogger.new(File.expand_path("../tmp/log",  __FILE__))
+  config.logger = Proselytism::Logger.new(File.expand_path("../tmp/log",  __FILE__), 0)
 end
 
 
